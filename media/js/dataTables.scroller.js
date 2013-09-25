@@ -467,6 +467,11 @@ Scroller.prototype = {
 		 */
 		if ( iScrollTop < this.s.redrawTop || iScrollTop > this.s.redrawBottom )
 		{
+			/**
+			 * Show div after hiding it in fnDrawCallback. Added by DVG.
+			 */
+			$(".DTS_Loading").css('display','block');
+			
 			var preRows = ((this.s.displayBuffer-1)/2) * this.s.viewportRows;
 			iTopRow = parseInt( iScrollTop / this.s.rowHeight, 10 ) - preRows;
 			if ( iTopRow < 0 )
@@ -597,6 +602,12 @@ Scroller.prototype = {
 				}, 0 );
 			}
 		}
+		
+		/**
+		 * Hide loading div because it displays behind table when table is under a certain height. Added by DVG.
+		 */
+		$(".DTS_Loading").css('display','none');
+		
 	},
 
 
@@ -738,7 +749,7 @@ Scroller.oDefaults = {
 	 *        }
 	 *    } );
 	 */
-	"trace": false,
+	"trace": true,
 
 	/** 
 	 * Scroller will attempt to automatically calculate the height of rows for it's internal
